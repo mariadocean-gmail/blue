@@ -1,0 +1,17 @@
+name: Deploy Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify human approval
+        uses: permission-protocol/verify@v1
+        with:
+          pp_base_url: https://app.permissionprotocol.com
+          pp_api_key: ${{ secrets.PP_API_KEY }}
+          environment: production
